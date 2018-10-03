@@ -1,0 +1,5 @@
+Git + path for console use
+Cuda 9.0
+CudNN
+Python
+	- Tensorflow

@@ -1,0 +1,7 @@
+C:\Users\lve\source\repos\PrepareData\PrepareData\bin\Release\PrepareData.exe.config
+C:\Users\lve\source\repos\PrepareData\PrepareData\bin\Release\PrepareData.exe
+C:\Users\lve\source\repos\PrepareData\PrepareData\bin\Release\PrepareData.pdb
+C:\Users\lve\source\repos\PrepareData\PrepareData\obj\Release\PrepareData.csproj.CoreCompileInputs.cache
+C:\Users\lve\source\repos\PrepareData\PrepareData\obj\Release\PrepareData.exe
+C:\Users\lve\source\repos\PrepareData\PrepareData\obj\Release\PrepareData.pdb
+C:\Users\lve\source\repos\PrepareData\PrepareData\obj\Release\PrepareData.csprojAssemblyReference.cache

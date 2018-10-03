@@ -1,0 +1,6 @@
+D:\Dateien\VisualStudio_Projects\PrepareData\CreateSegmentableData\bin\Debug\CreateSegmentableData.exe.config
+D:\Dateien\VisualStudio_Projects\PrepareData\CreateSegmentableData\bin\Debug\CreateSegmentableData.exe
+D:\Dateien\VisualStudio_Projects\PrepareData\CreateSegmentableData\bin\Debug\CreateSegmentableData.pdb
+D:\Dateien\VisualStudio_Projects\PrepareData\CreateSegmentableData\obj\Debug\CreateSegmentableData.csprojResolveAssemblyReference.cache
+D:\Dateien\VisualStudio_Projects\PrepareData\CreateSegmentableData\obj\Debug\CreateSegmentableData.exe
+D:\Dateien\VisualStudio_Projects\PrepareData\CreateSegmentableData\obj\Debug\CreateSegmentableData.pdb
