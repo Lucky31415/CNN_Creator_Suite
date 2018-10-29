@@ -73,6 +73,7 @@
     <Compile Include="ImageCreator.cs" />
     <Compile Include="JsonFile.cs" />
     <Compile Include="JSON_Reader.cs" />
+    <Compile Include="LocalConfig.cs" />
     <Compile Include="ObjectDetectionMenuForm.cs">
       <SubType>Form</SubType>
     </Compile>

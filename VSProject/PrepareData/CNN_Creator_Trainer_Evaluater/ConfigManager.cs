@@ -41,7 +41,7 @@ namespace CNN_Creator_Trainer_Evaluater
         {
             List<String> rP = this.getRecentProjects();
 
-            if (rP.Contains(projectPath))
+            if (!rP.Contains(projectPath))
                 configFile.Add(new XElement(propertyRecentProjects, projectPath));
         }
 

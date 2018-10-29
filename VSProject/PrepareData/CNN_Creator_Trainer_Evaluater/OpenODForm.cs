@@ -17,6 +17,7 @@ namespace CNN_Creator_Trainer_Evaluater
         public OpenODForm(Form caller)
         {
             InitializeComponent();
+            textBox1.Text = LocalConfig.getRecentProjects()[0];
             this.caller = caller;
         }
 
@@ -44,6 +45,7 @@ namespace CNN_Creator_Trainer_Evaluater
             {
                 if (Path.GetFileName(Directory.GetDirectories(projectPath)[1]).Equals("research"))
                 {
+                    LocalConfig.addRecentProject(projectPath);
                     ObjectDetectionMenuForm odmf1 = new ObjectDetectionMenuForm(projectPath);
                     odmf1.Show();
                     caller.Hide();

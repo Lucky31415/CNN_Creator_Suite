@@ -18,6 +18,7 @@ namespace CNN_Creator_Trainer_Evaluater
         public CreateProjectForm(Form caller)
         {
             InitializeComponent();
+            textBox1.Text = LocalConfig.getRecentProjects()[0];
             this.caller = caller;
         }
 
@@ -43,6 +44,7 @@ namespace CNN_Creator_Trainer_Evaluater
                     System.Windows.Forms.MessageBox.Show("This project already exists!");
                 } else
                 {
+                    LocalConfig.addRecentProject(projectPath);
                     Directory.CreateDirectory(projectPath);
 
                     getObjectDetectionAndSlim(projectPath);

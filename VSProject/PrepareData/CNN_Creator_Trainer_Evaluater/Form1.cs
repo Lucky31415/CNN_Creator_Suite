@@ -17,6 +17,7 @@ namespace CNN_Creator_Trainer_Evaluater
         public Form1()
         {
             InitializeComponent();
+            LocalConfig.init();
         }
 
         private void Form1_Load(object sender, EventArgs e)
