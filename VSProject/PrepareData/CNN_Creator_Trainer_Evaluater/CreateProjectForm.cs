@@ -18,7 +18,10 @@ namespace CNN_Creator_Trainer_Evaluater
         public CreateProjectForm(Form caller)
         {
             InitializeComponent();
-            textBox1.Text = LocalConfig.getRecentProjects()[0];
+            //textBox1.Text = LocalConfig.getRecentProjects()[0];
+            List<string> recentProjectList = LocalConfig.getRecentProjects();
+            comboBox1.Items.AddRange(recentProjectList.ToArray());
+            comboBox1.SelectedIndex = 0;
             this.caller = caller;
         }
 
@@ -29,7 +32,7 @@ namespace CNN_Creator_Trainer_Evaluater
 
         private void button2_Click(object sender, EventArgs e)
         {
-            String rootPath = textBox1.Text;
+            String rootPath = comboBox1.Text;
             String projectName = textBox2.Text;
 
             if (rootPath.Equals("") || projectName.Equals(""))
@@ -65,7 +68,7 @@ namespace CNN_Creator_Trainer_Evaluater
             if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
             {
                 String projectDirectory = fbd.SelectedPath;
-                textBox1.Text = projectDirectory;
+                comboBox1.Text = projectDirectory;
             }
         }
 

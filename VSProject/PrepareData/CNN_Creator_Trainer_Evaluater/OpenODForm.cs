@@ -17,7 +17,9 @@ namespace CNN_Creator_Trainer_Evaluater
         public OpenODForm(Form caller)
         {
             InitializeComponent();
-            textBox1.Text = LocalConfig.getRecentProjects()[0];
+            List<string> recentProjectList = LocalConfig.getRecentProjects();
+            comboBox1.Items.AddRange(recentProjectList.ToArray());
+            comboBox1.SelectedIndex = 0;
             this.caller = caller;
         }
 
@@ -29,13 +31,13 @@ namespace CNN_Creator_Trainer_Evaluater
             if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
             {
                 String projectDirectory = fbd.SelectedPath;
-                textBox1.Text = projectDirectory;
+                comboBox1.Text = projectDirectory;
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            String projectPath = textBox1.Text;
+            String projectPath = comboBox1.Text;
 
             if (projectPath.Equals(""))
             {

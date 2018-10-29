@@ -30,7 +30,7 @@ namespace CNN_Creator_Trainer_Evaluater
 
         public static List<String> getRecentProjects()
         {
-            List<XElement> recentProjectsX = configFile.Descendants(propertyRecentProjects).ToList();
+            List<XElement> recentProjectsX = configFile.Descendants("RecentProject").ToList();
 
             List<String> recentProjects = new List<String>();
             foreach (XElement el in recentProjectsX)
@@ -47,7 +47,7 @@ namespace CNN_Creator_Trainer_Evaluater
 
             if (!rP.Contains(projectPath))
             {
-                configFile.Descendants().First().Add(new XElement(propertyRecentProjects, projectPath));
+                configFile.Descendants().First().Add(new XElement("RecentProject", projectPath));
                 configFile.Save("localConfig.xml");
                 //configFile.Add(new XElement(propertyRecentProjects, projectPath));
             }
