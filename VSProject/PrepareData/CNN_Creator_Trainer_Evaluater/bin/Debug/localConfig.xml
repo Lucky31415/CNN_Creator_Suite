@@ -1,4 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RecentProjects>
-  <RecentProject>C:\Users\lukas\Documents\TestDir\ObjectDetection_01</RecentProject>
-</RecentProjects>
+<config>
+  <RecentProjects>
+    <RecentProject>C:\Users\lukas\Documents\TestDir\ObjectDetection_01</RecentProject>
+  </RecentProjects>
+  <ImageGeneratorSettings>
+    <imagePath>C:\Users\lukas\Documents\Repositories\CNN_Creator_Suite\CNN_Creator_Suite\Bilder\SourceImages</imagePath>
+    <xmlPath>C:\Users\lukas\Documents\Repositories\CNN_Creator_Suite\CNN_Creator_Suite\Bilder\SourceJSON</xmlPath>
+    <maxRot></maxRot>
+    <maxShiftX></maxShiftX>
+    <maxShiftY></maxShiftY>
+    <genCount></genCount>
+  </ImageGeneratorSettings>
+</config>

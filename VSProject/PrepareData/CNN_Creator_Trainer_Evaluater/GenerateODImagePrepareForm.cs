@@ -13,12 +13,10 @@ namespace CNN_Creator_Trainer_Evaluater
     public partial class GenerateODImagePrepareForm : Form
     {
         ObjectDetectionMenuForm caller;
-        //ConfigManager cm;
         public GenerateODImagePrepareForm(ObjectDetectionMenuForm caller)
         {
             InitializeComponent();
             this.caller = caller;
-            //cm = new ConfigManager(caller.getProjectDirectory());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -59,7 +57,7 @@ namespace CNN_Creator_Trainer_Evaluater
 
             ImageCreator.createBoxesFromJson(sourceImageDirectory, sourceXmlDirectory, caller.getImageDirectory(), caller.getAnnotationDirectory(), maxRotation, maxShift_x, maxShift_y, sampleCount);
             //ODImageCreator ic = new ODImageCreator(sourceImageDirectory, sourceXmlDirectory, caller.getImageDirectory(), caller.getAnnotationDirectory(), maxRotation, maxShift_x, maxShift_y, sampleCount);
-            //cm.setGenerateSettings(new String[] { textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text });
+            LocalConfig.setGenerateSettings(new String[] { textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text, textBox6.Text });
             caller.reloadImageList();
             caller.reloadXmlList();
             this.Close();
@@ -67,14 +65,14 @@ namespace CNN_Creator_Trainer_Evaluater
 
         private void GenerateODImagePrepareForm_Load(object sender, EventArgs e)
         {
-            //String[] settings = cm.getGenerateSettings();
-            //
-            //textBox1.Text = settings[0];
-            //textBox2.Text = settings[1];
-            //textBox3.Text = settings[2];
-            //textBox4.Text = settings[3];
-            //textBox5.Text = settings[4];
-            //textBox6.Text = settings[5];
+            String[] settings = LocalConfig.getGenerateSettings();
+
+            textBox1.Text = settings[0];
+            textBox2.Text = settings[1];
+            textBox3.Text = settings[2];
+            textBox4.Text = settings[3];
+            textBox5.Text = settings[4];
+            textBox6.Text = settings[5];
         }
     }
 }
