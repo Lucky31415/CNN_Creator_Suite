@@ -63,6 +63,7 @@ namespace CNN_Creator_Trainer_Evaluater
         public void reloadImageList()
         {
             string[] files = Directory.GetFiles(imageDirectory);
+            listView1.Clear();
             foreach (string file in files)
             {
                 string fileName = Path.GetFileName(file);
@@ -75,6 +76,7 @@ namespace CNN_Creator_Trainer_Evaluater
         public void reloadXmlList()
         {
             string[] files = Directory.GetFiles(Path.Combine(annotationDirectory, "xmls"));
+            listView2.Clear();
             foreach (string file in files)
             {
                 string fileName = Path.GetFileName(file);
