@@ -3,3 +3,5 @@ Cuda 9.0
 CudNN
 Python
 	- Tensorflow
+	- lxml
+	- Pillow

@@ -160,7 +160,7 @@ namespace CNN_Creator_Trainer_Evaluater
 
                     XMLAnnotation changedLabelFile = createBoxLabelFileFromJson(changedFile, changed);
                     changedLabelFile.save(targetXMLDirectory);
-                    trainvalFile.WriteLine(changedFile.getFilename());
+                    trainvalFile.WriteLine(Path.GetFileNameWithoutExtension(fileName));
                     changed.Dispose();
                     Console.Write("#");
                 }

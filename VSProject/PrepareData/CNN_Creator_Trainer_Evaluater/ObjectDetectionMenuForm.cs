@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Management.Automation;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,6 +19,8 @@ namespace CNN_Creator_Trainer_Evaluater
         private string projectDirectory;
         private string imageDirectory;
         private string annotationDirectory;
+
+        PSDataCollection<PSObject> outputCollection;
 
         public ObjectDetectionMenuForm()
         {
@@ -139,38 +142,61 @@ namespace CNN_Creator_Trainer_Evaluater
         {
             compileProtos();
 
-            PowerShell ps = PowerShell.Create();
+            outputCollection = new PSDataCollection<PSObject>();
+            outputCollection.DataAdded += writeOuputToBox;
 
-            //ps.AddScript("SET PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim");
-            ps.AddScript("cd " + Path.Combine(projectDirectory, "research"));
-            ps.AddScript("python create_tf_record.py --data_dir =`pwd` --output_dir =`pwd`");
-
-            Collection<PSObject> PSOutput = ps.Invoke();
-
-            foreach (PSObject outputItem in PSOutput)
+            using (PowerShell ps = PowerShell.Create())
             {
-                if (outputItem != null)
+                //ps.AddScript("SET PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim");
+                ps.AddScript("cd " + Path.Combine(projectDirectory, "research"));
+                ps.AddScript("python create_tf_record.py --data_dir =`pwd` --output_dir =`pwd`");
+
+                IAsyncResult result = ps.BeginInvoke<PSObject, PSObject>(null, outputCollection);
+
+                // do something else until execution has completed.
+                // this could be sleep/wait, or perhaps some other work
+                while (result.IsCompleted == false)
                 {
-                    richTextBox1.Text += outputItem.ToString();
+                    //richTextBox1.Text += "\n" + outputCollection.Last();
+                    Console.WriteLine("Waiting for pipeline to finish...");
+                    Thread.Sleep(1000);
+
+                    // might want to place a timeout here...
+                }
+
+                Console.WriteLine("Finished!");
+                if (File.Exists(Path.Combine(projectDirectory, "research", "train.record")) &&
+                    File.Exists(Path.Combine(projectDirectory, "research", "val.record")))
+                {
+                    richTextBox1.Text += "\nCreated train.record & val.record successfully!";
                 }
             }
         }
 
+        void writeOuputToBox(object sender, DataAddedEventArgs e)
+        {
+            richTextBox1.Text += outputCollection[e.Index];
+            richTextBox1.Text += "\n Object added!";
+        }
+
         private void compileProtos()
         {
-            PowerShell ps = PowerShell.Create();
-            String protoDir = Path.Combine(Path.Combine(Path.Combine(projectDirectory, "research"), "object_detection"), "protos");
-
-            String[] files = Directory.GetFiles(protoDir);
-            foreach (String file in files)
+            using (PowerShell ps = PowerShell.Create())
             {
-                if (file.Substring(file.LastIndexOf(".")).Equals(".proto"))
+                String protoDir = Path.Combine(Path.Combine(Path.Combine(projectDirectory, "research"), "object_detection"), "protos");
+
+                String[] files = Directory.GetFiles(protoDir);
+                foreach (String file in files)
                 {
-                    if (!files.Contains(file.Substring(0, file.LastIndexOf(".")) + "_pb2.py"))
+                    if (file.Substring(file.LastIndexOf(".")).Equals(".proto"))
                     {
-                        ps.AddScript("cd " + Path.Combine(projectDirectory, "research"));
-                        ps.AddScript("protoc ./object_detection/protos/" + Path.GetFileName(file) + " --python_out=.");
-                        ps.Invoke();
+                        if (!files.Contains(file.Substring(0, file.LastIndexOf(".")) + "_pb2.py"))
+                        {
+                            ps.AddScript("cd " + Path.Combine(projectDirectory, "research"));
+                            ps.AddScript("protoc ./object_detection/protos/" + Path.GetFileName(file) + " --python_out=.");
+                            ps.Invoke();
+                            richTextBox1.Text += "\nCompiled Proto: " + Path.GetFileName(file);
+                        }
                     }
                 }
             }
