@@ -137,9 +137,9 @@ namespace CNN_Creator_Trainer_Evaluater
 
         private void button5_Click(object sender, EventArgs e)
         {
-            PowerShell ps = PowerShell.Create();
             compileProtos();
 
+            PowerShell ps = PowerShell.Create();
 
             //ps.AddScript("SET PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim");
             ps.AddScript("cd " + Path.Combine(projectDirectory, "research"));
@@ -169,7 +169,7 @@ namespace CNN_Creator_Trainer_Evaluater
                     if (!files.Contains(file.Substring(0, file.LastIndexOf(".")) + "_pb2.py"))
                     {
                         ps.AddScript("cd " + Path.Combine(projectDirectory, "research"));
-                        ps.AddScript("protoc .\\object_detection\\protos\\" + Path.GetFileName(file) + " --python_out=.");
+                        ps.AddScript("protoc ./object_detection/protos/" + Path.GetFileName(file) + " --python_out=.");
                         ps.Invoke();
                     }
                 }
